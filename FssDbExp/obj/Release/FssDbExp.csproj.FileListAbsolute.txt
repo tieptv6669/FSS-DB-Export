@@ -1,0 +1,12 @@
+D:\FssDbExp\FssDbExp\bin\Release\FssDbExp.exe.config
+D:\FssDbExp\FssDbExp\bin\Release\FssDbExp.exe
+D:\FssDbExp\FssDbExp\bin\Release\FssDbExp.pdb
+D:\FssDbExp\FssDbExp\bin\Release\Oracle.ManagedDataAccess.dll
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.MainGui.resources
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.Properties.Resources.resources
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csproj.GenerateResource.cache
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csproj.CoreCompileInputs.cache
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csproj.CopyComplete
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.exe
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.pdb
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csprojAssemblyReference.cache

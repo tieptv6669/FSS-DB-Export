@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FssDbExp", "FssDbExp\FssDbExp.csproj", "{BDA10507-73F5-4801-8AF8-C0E78F770861}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDA10507-73F5-4801-8AF8-C0E78F770861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA10507-73F5-4801-8AF8-C0E78F770861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA10507-73F5-4801-8AF8-C0E78F770861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA10507-73F5-4801-8AF8-C0E78F770861}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EF137B5-941F-4580-8E83-57704CA8219F}
+	EndGlobalSection
+EndGlobal
