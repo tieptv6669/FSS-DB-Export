@@ -52,21 +52,27 @@ namespace FssDbExp
             return List;
         }
 
-        public static List<string> listConnectionStr(List<string> listTnsName, string tnsFileContent)
+        public static List<TNSModel> listConnectionStr(List<string> listTnsName, string tnsFileContent)
         {
-            List<string> result = new List<string>();
+            List<TNSModel> result = new List<TNSModel>();
             tnsFileContent = tnsFileContent.Replace("\r", "").Replace(" ", "").Replace("\n", "");
             int startIndex, length;
             for (int x = 0; x < listTnsName.Count - 1; x++)
             {
+                TNSModel tNSModel = new TNSModel();
+                tNSModel.TnsName = listTnsName[x];
                 startIndex = tnsFileContent.IndexOf(listTnsName[x]) + listTnsName[x].Length + 1;
                 length = tnsFileContent.IndexOf(listTnsName[x + 1]) - startIndex;
-                result.Add( tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", ""));
+                tNSModel.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                result.Add(tNSModel);
             }
 
             startIndex = tnsFileContent.IndexOf(listTnsName[listTnsName.Count - 1]) + listTnsName[listTnsName.Count - 1].Length + 1;
             length = tnsFileContent.Length - startIndex;
-            result.Add(tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", ""));
+            TNSModel temp = new TNSModel();
+            temp.TnsName = listTnsName[listTnsName.Count - 1];
+            temp.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
+            result.Add(temp);
 
             return result;
         }

@@ -32,20 +32,15 @@ namespace FssDbExp
         /// </summary>
         /// <param name="oracleProvider"></param>
         /// <returns></returns>
-        public string BuildConnectionString(OracleProvider oracleProvider)
+        public string BuildConnectionString(string dataSource, string user, string pass)
         {
             try
             {
-                string conString = "";
-                conString = ConfigurationManager.ConnectionStrings["oracleDB"].ConnectionString;
-                conString = conString.Replace("_H_", oracleProvider.Host);
-                conString = conString.Replace("_P_", oracleProvider.Port);
-                conString = conString.Replace("_SN_", oracleProvider.Service_name);
-
+                string conString = "Data Source = " + dataSource;
                 OracleConnectionStringBuilder oracleConnectionStringBuilder = new OracleConnectionStringBuilder();
                 oracleConnectionStringBuilder.ConnectionString = conString;
-                oracleConnectionStringBuilder.UserID = oracleProvider.User;
-                oracleConnectionStringBuilder.Password = oracleProvider.Pass;
+                oracleConnectionStringBuilder.UserID = user;
+                oracleConnectionStringBuilder.Password = pass;
 
                 return oracleConnectionStringBuilder.ToString();
             }
@@ -77,5 +72,28 @@ namespace FssDbExp
                 return null;
             }
         }
+
+        /// <summary>
+        /// Thực thi câu lệnh truy vấn
+        /// </summary>
+        /// <param name="oracleCmd"></param>
+        /// <returns></returns>
+        public static OracleDataReader GetOracleDataReader(OracleCommand oracleCmd, OracleConnection oracleConnection)
+        {
+            try
+            {
+                OracleDataReader oracleDataReader;
+                oracleCmd.Connection = oracleConnection;
+                oracleDataReader = oracleCmd.ExecuteReader();
+
+                return oracleDataReader;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
     }
 }
