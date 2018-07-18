@@ -37,11 +37,13 @@ namespace FssDbExp
             {
                 textBoxResultTestConnect.BackColor = Color.LightGreen;
                 textBoxResultTestConnect.Text = "SUCCESS";
+                textBoxResultTestConnect.ForeColor = Color.White;
             }
             else
             {
                 textBoxResultTestConnect.BackColor = Color.Red;
                 textBoxResultTestConnect.Text = "FAIL";
+                textBoxResultTestConnect.ForeColor = Color.White;
             }
         }
 
@@ -60,7 +62,18 @@ namespace FssDbExp
 
         private void MainGui_Load(object sender, EventArgs e)
         {
-            comboBoxDirType.SelectedIndex = 0;
+            //progressBarExpDt.Increment(10);
+            //comboBoxDirType.SelectedIndex = 0;
+            string tnsContent = TNS_Parser.getTnsFileContent("tnsnames.ora");
+
+            List<string> list = TNS_Parser.listConnectionStr(TNS_Parser.getListTnsName(tnsContent), tnsContent);
+        }
+
+        private void buttonExpData_Click(object sender, EventArgs e)
+        {
+            string name = "Tran Viet Tiep";
+            string path = textBoxRootDir.Text + "\\" + "result.sql";
+            System.IO.File.WriteAllText("result.sql", name);
         }
     }
 }

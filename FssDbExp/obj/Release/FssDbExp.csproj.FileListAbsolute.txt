@@ -10,3 +10,13 @@ D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csproj.CopyComplete
 D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.exe
 D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.pdb
 D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.csprojAssemblyReference.cache
+G:\OrcDataExp\FssDbExp\bin\Release\FssDbExp.exe.config
+G:\OrcDataExp\FssDbExp\bin\Release\FssDbExp.exe
+G:\OrcDataExp\FssDbExp\bin\Release\FssDbExp.pdb
+G:\OrcDataExp\FssDbExp\bin\Release\Oracle.ManagedDataAccess.dll
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.MainGui.resources
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.Properties.Resources.resources
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.csproj.GenerateResource.Cache
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.csproj.CoreCompileInputs.cache
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.exe
+G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.pdb

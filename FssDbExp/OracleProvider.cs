@@ -38,12 +38,9 @@ namespace FssDbExp
             {
                 string conString = "";
                 conString = ConfigurationManager.ConnectionStrings["oracleDB"].ConnectionString;
-                int indexHost = conString.IndexOf("HOST = ") + "HOST = ".Length;
-                conString = conString.Insert(indexHost, oracleProvider.Host);
-                int indexPort = conString.IndexOf("PORT = ") + "PORT = ".Length;
-                conString = conString.Insert(indexPort, oracleProvider.Port);
-                int indexServiceName = conString.IndexOf("SERVICE_NAME = ") + "SERVICE_NAME = ".Length;
-                conString = conString.Insert(indexServiceName, oracleProvider.Service_name);
+                conString = conString.Replace("_H_", oracleProvider.Host);
+                conString = conString.Replace("_P_", oracleProvider.Port);
+                conString = conString.Replace("_SN_", oracleProvider.Service_name);
 
                 OracleConnectionStringBuilder oracleConnectionStringBuilder = new OracleConnectionStringBuilder();
                 oracleConnectionStringBuilder.ConnectionString = conString;
