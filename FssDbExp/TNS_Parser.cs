@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace FssDbExp
 {
+    /// <summary>
+    /// Owner: Tiep TV
+    /// Create date: 19/7/2018
+    /// </summary>
     public class TNS_Parser
     {
         public static string getTnsFileContent(string FP)
@@ -21,7 +25,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return inputString;
@@ -46,7 +50,7 @@ namespace FssDbExp
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return List;
@@ -55,25 +59,31 @@ namespace FssDbExp
         public static List<TNSModel> listConnectionStr(List<string> listTnsName, string tnsFileContent)
         {
             List<TNSModel> result = new List<TNSModel>();
-            tnsFileContent = tnsFileContent.Replace("\r", "").Replace(" ", "").Replace("\n", "");
-            int startIndex, length;
-            for (int x = 0; x < listTnsName.Count - 1; x++)
+            try
             {
-                TNSModel tNSModel = new TNSModel();
-                tNSModel.TnsName = listTnsName[x];
-                startIndex = tnsFileContent.IndexOf(listTnsName[x]) + listTnsName[x].Length + 1;
-                length = tnsFileContent.IndexOf(listTnsName[x + 1]) - startIndex;
-                tNSModel.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
-                result.Add(tNSModel);
+                tnsFileContent = tnsFileContent.Replace("\r", "").Replace(" ", "").Replace("\n", "");
+                int startIndex, length;
+                for (int x = 0; x < listTnsName.Count - 1; x++)
+                {
+                    TNSModel tNSModel = new TNSModel();
+                    tNSModel.TnsName = listTnsName[x];
+                    startIndex = tnsFileContent.IndexOf(listTnsName[x]) + listTnsName[x].Length + 1;
+                    length = tnsFileContent.IndexOf(listTnsName[x + 1]) - startIndex;
+                    tNSModel.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                    result.Add(tNSModel);
+                }
+
+                startIndex = tnsFileContent.IndexOf(listTnsName[listTnsName.Count - 1]) + listTnsName[listTnsName.Count - 1].Length + 1;
+                length = tnsFileContent.Length - startIndex;
+                TNSModel temp = new TNSModel();
+                temp.TnsName = listTnsName[listTnsName.Count - 1];
+                temp.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                result.Add(temp);
             }
-
-            startIndex = tnsFileContent.IndexOf(listTnsName[listTnsName.Count - 1]) + listTnsName[listTnsName.Count - 1].Length + 1;
-            length = tnsFileContent.Length - startIndex;
-            TNSModel temp = new TNSModel();
-            temp.TnsName = listTnsName[listTnsName.Count - 1];
-            temp.DataSource = tnsFileContent.Substring(startIndex, length).Trim().Replace("\n", "").Replace("\r", "").Replace(" ", "");
-            result.Add(temp);
-
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             return result;
         }
     }

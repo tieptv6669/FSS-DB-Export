@@ -56,6 +56,8 @@
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.checkBoxExpObj = new System.Windows.Forms.CheckBox();
+            this.checkBoxExpTbl = new System.Windows.Forms.CheckBox();
             this.groupBoxCnInfo.SuspendLayout();
             this.groupBoxExpType.SuspendLayout();
             this.SuspendLayout();
@@ -151,6 +153,8 @@
             // 
             // groupBoxExpType
             // 
+            this.groupBoxExpType.Controls.Add(this.checkBoxExpTbl);
+            this.groupBoxExpType.Controls.Add(this.checkBoxExpObj);
             this.groupBoxExpType.Controls.Add(this.labelMkDir);
             this.groupBoxExpType.Controls.Add(this.buttonCreateDir);
             this.groupBoxExpType.Controls.Add(this.buttonSelectDirectory);
@@ -253,10 +257,12 @@
             // checkBoxHost
             // 
             this.checkBoxHost.AutoSize = true;
-            this.checkBoxHost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxHost.Checked = true;
+            this.checkBoxHost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxHost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxHost.Location = new System.Drawing.Point(319, 56);
             this.checkBoxHost.Name = "checkBoxHost";
-            this.checkBoxHost.Size = new System.Drawing.Size(60, 17);
+            this.checkBoxHost.Size = new System.Drawing.Size(56, 17);
             this.checkBoxHost.TabIndex = 13;
             this.checkBoxHost.Text = "HOST";
             this.checkBoxHost.UseVisualStyleBackColor = true;
@@ -264,10 +270,12 @@
             // checkBoxBDS
             // 
             this.checkBoxBDS.AutoSize = true;
-            this.checkBoxBDS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxBDS.Checked = true;
+            this.checkBoxBDS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxBDS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxBDS.Location = new System.Drawing.Point(319, 29);
             this.checkBoxBDS.Name = "checkBoxBDS";
-            this.checkBoxBDS.Size = new System.Drawing.Size(85, 17);
+            this.checkBoxBDS.Size = new System.Drawing.Size(78, 17);
             this.checkBoxBDS.TabIndex = 12;
             this.checkBoxBDS.Text = "BDSHOST";
             this.checkBoxBDS.UseVisualStyleBackColor = true;
@@ -284,9 +292,10 @@
             // 
             // textBoxVersionName
             // 
-            this.textBoxVersionName.Location = new System.Drawing.Point(98, 22);
+            this.textBoxVersionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxVersionName.Location = new System.Drawing.Point(98, 23);
             this.textBoxVersionName.Name = "textBoxVersionName";
-            this.textBoxVersionName.Size = new System.Drawing.Size(149, 23);
+            this.textBoxVersionName.Size = new System.Drawing.Size(149, 21);
             this.textBoxVersionName.TabIndex = 10;
             this.textBoxVersionName.Text = "1.1.1.1";
             // 
@@ -304,7 +313,7 @@
             // 
             this.buttonExpData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExpData.ForeColor = System.Drawing.Color.Blue;
-            this.buttonExpData.Location = new System.Drawing.Point(251, 302);
+            this.buttonExpData.Location = new System.Drawing.Point(251, 312);
             this.buttonExpData.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExpData.Name = "buttonExpData";
             this.buttonExpData.Size = new System.Drawing.Size(143, 35);
@@ -315,7 +324,7 @@
             // 
             // progressBarExpDt
             // 
-            this.progressBarExpDt.Location = new System.Drawing.Point(79, 255);
+            this.progressBarExpDt.Location = new System.Drawing.Point(79, 265);
             this.progressBarExpDt.Name = "progressBarExpDt";
             this.progressBarExpDt.Size = new System.Drawing.Size(559, 17);
             this.progressBarExpDt.Step = 1;
@@ -335,7 +344,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 256);
+            this.label1.Location = new System.Drawing.Point(7, 266);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 12;
@@ -343,7 +352,7 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(79, 278);
+            this.progressBar2.Location = new System.Drawing.Point(79, 288);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(559, 17);
             this.progressBar2.Step = 1;
@@ -353,7 +362,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 295);
+            this.label7.Location = new System.Drawing.Point(19, 287);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 13);
             this.label7.TabIndex = 14;
@@ -361,17 +370,43 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 280);
+            this.label8.Location = new System.Drawing.Point(11, 290);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 15;
             this.label8.Text = "Table script:";
             // 
+            // checkBoxExpObj
+            // 
+            this.checkBoxExpObj.AutoSize = true;
+            this.checkBoxExpObj.Checked = true;
+            this.checkBoxExpObj.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxExpObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxExpObj.Location = new System.Drawing.Point(98, 111);
+            this.checkBoxExpObj.Name = "checkBoxExpObj";
+            this.checkBoxExpObj.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxExpObj.TabIndex = 19;
+            this.checkBoxExpObj.Text = "Export Object";
+            this.checkBoxExpObj.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxExpTbl
+            // 
+            this.checkBoxExpTbl.AutoSize = true;
+            this.checkBoxExpTbl.Checked = true;
+            this.checkBoxExpTbl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxExpTbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxExpTbl.Location = new System.Drawing.Point(194, 111);
+            this.checkBoxExpTbl.Name = "checkBoxExpTbl";
+            this.checkBoxExpTbl.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxExpTbl.TabIndex = 20;
+            this.checkBoxExpTbl.Text = "Export Table";
+            this.checkBoxExpTbl.UseVisualStyleBackColor = true;
+            // 
             // MainGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 340);
+            this.ClientSize = new System.Drawing.Size(644, 351);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.progressBar2);
@@ -385,7 +420,7 @@
             this.Name = "MainGui";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FssDbExp";
+            this.Text = "FssDbExp TiepTV";
             this.Load += new System.EventHandler(this.MainGui_Load);
             this.groupBoxCnInfo.ResumeLayout(false);
             this.groupBoxCnInfo.PerformLayout();
@@ -426,6 +461,8 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBoxExpTbl;
+        private System.Windows.Forms.CheckBox checkBoxExpObj;
     }
 }
 

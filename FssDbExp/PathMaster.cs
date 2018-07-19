@@ -4,8 +4,6 @@ namespace FssDbExp
 {
     public class PathMaster
     {
-        private List<string> listPath;
-
         public List<string> ListPath { get; set; }
 
         public PathMaster(string verName, bool isBDSHOST, bool isHOST, string dirType, string rootPath)

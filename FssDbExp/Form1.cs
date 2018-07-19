@@ -78,65 +78,70 @@ namespace FssDbExp
             string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
             OracleConnection oracConnection = oracleProvider.GetConnection(conString);
 
-
             if (oracleConnection != null)
             {
                 oracleConnection = oracConnection;
                 DBName = textBoxUser.Text;
             }
 
-            string[] lsTable = getListTableNameFromFile();
-            int progressSize = 0;
-            for (int index = 0; index < lsTable.Length; index++)
+            if (checkBoxExpObj.Checked)
             {
-                string[] tbl = lsTable[index].Split('_');
-                List<string> listObjKeyName = GenScript.getListObjKeyName(tbl[0], tbl[1], oracleConnection);
-                progressSize += listObjKeyName.Count;
-            }
-            progressBar2.Maximum = progressSize;
-            for (int index = 0; index < lsTable.Length; index++)
-            {
-                string[] tbl = lsTable[index].Split('_');
-                GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBar2);
+                if (oracleConnection != null && oracleConnection.State == ConnectionState.Open)
+                {
+                    // get list view
+                    List<string> listViewName = getListObject("VIEW");
+                    // get list trigger
+                    List<string> listTriggerName = getListObject("TRIGGER");
+                    // get list procedure
+                    List<string> listProcedureName = getListObject("PROCEDURE");
+                    // get list function
+                    List<string> listFunctionName = getListObject("FUNCTION");
+                    // get list package
+                    List<string> listPackageName = getListObject("PACKAGE");
+                    // get list type
+                    List<string> listType = getListObject("TYPE");
+
+                    progressBarExpDt.Maximum = listViewName.Count + listTriggerName.Count +
+                                                listProcedureName.Count + listFunctionName.Count +
+                                                +listPackageName.Count + listType.Count;
+                    progressBarExpDt.Step = 1;
+
+                    // gen view
+                    genObject(listViewName, "VIEW", progressBarExpDt);
+                    // gen trigger
+                    genObject(listTriggerName, "TRIGGER", progressBarExpDt);
+                    // gen procedure
+                    genObject(listProcedureName, "PROCEDURE", progressBarExpDt);
+                    // gen function 
+                    genObject(listFunctionName, "FUNCTION", progressBarExpDt);
+                    // gen package
+                    genObject(listPackageName, "PACKAGE", progressBarExpDt);
+                    // gen type
+                    genObject(listType, "TYPE", progressBarExpDt);
+                }
             }
 
-            if (oracleConnection != null && oracleConnection.State == ConnectionState.Open)
+            if (checkBoxExpTbl.Checked)
             {
-                // get list view
-                List<string> listViewName = getListObject("VIEW");
-                // get list trigger
-                List<string> listTriggerName = getListObject("TRIGGER");
-                // get list procedure
-                List<string> listProcedureName = getListObject("PROCEDURE");
-                // get list function
-                List<string> listFunctionName = getListObject("FUNCTION");
-                // get list package
-                List<string> listPackageName = getListObject("PACKAGE");
-                // get list type
-                List<string> listType = getListObject("TYPE");
-
-                progressBarExpDt.Maximum = listViewName.Count + listTriggerName.Count +
-                                            listProcedureName.Count + listFunctionName.Count + 
-                                            + listPackageName.Count + listType.Count;
-                progressBarExpDt.Step = 1;
-
-                // gen view
-                genObject(listViewName, "VIEW", progressBarExpDt);
-                // gen trigger
-                genObject(listTriggerName, "TRIGGER", progressBarExpDt);
-                // gen procedure
-                genObject(listProcedureName, "PROCEDURE", progressBarExpDt);
-                // gen function 
-                genObject(listFunctionName, "FUNCTION", progressBarExpDt);
-                // gen package
-                genObject(listPackageName, "PACKAGE", progressBarExpDt);
-                // gen type
-                genObject(listType, "TYPE", progressBarExpDt);
+                string[] lsTable = getListTableNameFromFile();
+                int progressSize = 0;
+                for (int index = 0; index < lsTable.Length; index++)
+                {
+                    string[] tbl = lsTable[index].Split('_');
+                    List<string> listObjKeyName = GenScript.getListObjKeyName(tbl[0], tbl[1], oracleConnection);
+                    progressSize += listObjKeyName.Count;
+                }
+                progressBar2.Maximum = progressSize;
+                for (int index = 0; index < lsTable.Length; index++)
+                {
+                    string[] tbl = lsTable[index].Split('_');
+                    GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBar2);
+                }
             }
+            
             oracleConnection.Close();
             oracleConnection.Dispose();
-
-            MessageBox.Show("Export data completed", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Export completed!", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonCreateDir_Click(object sender, EventArgs ev)

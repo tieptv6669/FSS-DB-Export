@@ -11,13 +11,6 @@ namespace FssDbExp
 {
     public class OracleProvider
     {
-        // Attributes
-        private string host;
-        private string port;
-        private string service_name;
-        private string user;
-        private string pass;
-
         // Properties
         public string Host { get; set; }
         public string Port { get; set; }
@@ -46,7 +39,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return "";
             }
         }
@@ -68,7 +61,7 @@ namespace FssDbExp
                 return oracleConnection;
             }catch(Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
         }
@@ -90,7 +83,7 @@ namespace FssDbExp
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }

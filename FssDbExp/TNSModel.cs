@@ -8,8 +8,7 @@ namespace FssDbExp
 {
     public class TNSModel
     {
-        private string tnsName;
-        private string dataSource;
+        public static string owner = "Tiep TV"; 
 
         public string TnsName { get; set; }
         public string DataSource { get; set; }

@@ -1,0 +1,27 @@
+FLEX33 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.33)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = FLEX)
+    )
+  )
+FLEX_111 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.111)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = ORCL)
+    )
+  )
+FLEX_233 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.233)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = FLEX)
+    )
+  ) 
