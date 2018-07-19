@@ -52,6 +52,10 @@
             this.buttonExpData = new System.Windows.Forms.Button();
             this.progressBarExpDt = new System.Windows.Forms.ProgressBar();
             this.labelTestConnect = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBoxCnInfo.SuspendLayout();
             this.groupBoxExpType.SuspendLayout();
             this.SuspendLayout();
@@ -104,6 +108,7 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(141, 23);
             this.textBoxPass.TabIndex = 9;
+            this.textBoxPass.Text = "HOST";
             // 
             // textBoxUser
             // 
@@ -112,6 +117,7 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(146, 23);
             this.textBoxUser.TabIndex = 8;
+            this.textBoxUser.Text = "HOSTABSD_1905";
             // 
             // label3
             // 
@@ -282,6 +288,7 @@
             this.textBoxVersionName.Name = "textBoxVersionName";
             this.textBoxVersionName.Size = new System.Drawing.Size(149, 23);
             this.textBoxVersionName.TabIndex = 10;
+            this.textBoxVersionName.Text = "1.1.1.1";
             // 
             // labelVerName
             // 
@@ -297,7 +304,7 @@
             // 
             this.buttonExpData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExpData.ForeColor = System.Drawing.Color.Blue;
-            this.buttonExpData.Location = new System.Drawing.Point(251, 283);
+            this.buttonExpData.Location = new System.Drawing.Point(251, 302);
             this.buttonExpData.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExpData.Name = "buttonExpData";
             this.buttonExpData.Size = new System.Drawing.Size(143, 35);
@@ -308,9 +315,9 @@
             // 
             // progressBarExpDt
             // 
-            this.progressBarExpDt.Location = new System.Drawing.Point(6, 255);
+            this.progressBarExpDt.Location = new System.Drawing.Point(79, 255);
             this.progressBarExpDt.Name = "progressBarExpDt";
-            this.progressBarExpDt.Size = new System.Drawing.Size(632, 17);
+            this.progressBarExpDt.Size = new System.Drawing.Size(559, 17);
             this.progressBarExpDt.Step = 1;
             this.progressBarExpDt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarExpDt.TabIndex = 11;
@@ -325,11 +332,50 @@
             this.labelTestConnect.Size = new System.Drawing.Size(0, 15);
             this.labelTestConnect.TabIndex = 19;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 256);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Object script:";
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(79, 278);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(559, 17);
+            this.progressBar2.Step = 1;
+            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar2.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 295);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 13);
+            this.label7.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 280);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Table script:";
+            // 
             // MainGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 323);
+            this.ClientSize = new System.Drawing.Size(644, 340);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.progressBar2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBarExpDt);
             this.Controls.Add(this.buttonExpData);
             this.Controls.Add(this.groupBoxExpType);
@@ -346,6 +392,7 @@
             this.groupBoxExpType.ResumeLayout(false);
             this.groupBoxExpType.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -375,6 +422,10 @@
         private System.Windows.Forms.Button buttonCreateDir;
         private System.Windows.Forms.Label labelMkDir;
         private System.Windows.Forms.Label labelTestConnect;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using System.IO;
@@ -29,6 +26,8 @@ namespace FssDbExp
             OracleProvider oracleProvider = new OracleProvider();
             string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
             OracleConnection oracConnection = oracleProvider.GetConnection(conString);
+
+         
 
             if (oracConnection != null)
             {
@@ -79,10 +78,26 @@ namespace FssDbExp
             string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
             OracleConnection oracConnection = oracleProvider.GetConnection(conString);
 
+
             if (oracleConnection != null)
             {
                 oracleConnection = oracConnection;
                 DBName = textBoxUser.Text;
+            }
+
+            string[] lsTable = getListTableNameFromFile();
+            int progressSize = 0;
+            for (int index = 0; index < lsTable.Length; index++)
+            {
+                string[] tbl = lsTable[index].Split('_');
+                List<string> listObjKeyName = GenScript.getListObjKeyName(tbl[0], tbl[1], oracleConnection);
+                progressSize += listObjKeyName.Count;
+            }
+            progressBar2.Maximum = progressSize;
+            for (int index = 0; index < lsTable.Length; index++)
+            {
+                string[] tbl = lsTable[index].Split('_');
+                GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBar2);
             }
 
             if (oracleConnection != null && oracleConnection.State == ConnectionState.Open)
@@ -144,6 +159,7 @@ namespace FssDbExp
                 }
                 labelMkDir.Text = "Done!";
                 pathMaster = pMaster;
+                
             }
             catch(Exception e)
             {
@@ -174,8 +190,12 @@ namespace FssDbExp
                 OracleCommand oracleCommand = new OracleCommand();
                 oracleCommand.CommandText = orcCommand;
                 oracleCommand.Parameters.Add(new OracleParameter("mOwner", DBName));
-
                 OracleDataReader oracleDataReader = OracleProvider.GetOracleDataReader(oracleCommand, oracleConnection);
+
+                int x = oracleDataReader.FieldCount;
+                string y = oracleDataReader.GetName(0);
+                string z =  oracleDataReader.GetDataTypeName(0);
+
                 if (oracleDataReader != null && oracleDataReader.HasRows)
                 {
                     while (oracleDataReader.Read())
@@ -202,6 +222,7 @@ namespace FssDbExp
                 OracleCommand oracleCommand = new OracleCommand();
                 oracleCommand.CommandText = orcCommand;
                 OracleDataReader oracleDataReader = OracleProvider.GetOracleDataReader(oracleCommand, oracleConnection);
+                
                 if (oracleDataReader != null && oracleDataReader.HasRows)
                 {
                     oracleDataReader.Read();
@@ -278,6 +299,16 @@ namespace FssDbExp
             }
 
             return path;
+        }
+
+        private string[] getListTableNameFromFile()
+        {
+            string[] lines = File.ReadAllLines("lsTable.txt");
+            for(int index = 0; index < lines.Length; index++)
+            {
+                lines[index] = lines[index].ToUpper();
+            }
+            return lines;
         }
     }
 }

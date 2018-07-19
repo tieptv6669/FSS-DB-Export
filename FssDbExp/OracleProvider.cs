@@ -95,5 +95,44 @@ namespace FssDbExp
             }
         }
 
+        public static string GenScriptInsert(string tableName, List<string> headerName, List<string> values)
+        {
+            string script = "INSERT INTO " + tableName + " (";
+
+            for (int index = 0; index < headerName.Count - 1; index++)
+            {
+                script += headerName[index];
+                script += ",";
+            }
+            script += headerName[headerName.Count - 1];
+            script += ")\n VALUES (";
+
+            for(int index = 0; index < values.Count - 1; index++)
+            {
+                if(values[index] != "null")
+                {
+                    script += "'";
+                    script += values[index];
+                    script += "',";
+                }
+                else
+                {
+                    script += values[index];
+                    script += ",";
+                }
+            }
+            if (values[values.Count - 1] != "null")
+            {
+                script += "'";
+                script += values[values.Count - 1];
+                script += "');\n";
+            }
+            else
+            {
+                script += values[values.Count - 1];
+                script += ");\n";
+            }
+            return script;
+        }
     }
 }
