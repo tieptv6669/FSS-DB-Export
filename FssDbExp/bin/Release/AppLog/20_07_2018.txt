@@ -1,0 +1,5 @@
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. 7/20/2018 11:46:42 AM
+ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:47:43 AM
+ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:47:44 AM
+ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:47:53 AM
+ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:48:14 AM

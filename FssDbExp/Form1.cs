@@ -21,23 +21,31 @@ namespace FssDbExp
         }
 
 
-        private void buttonTestConnect_Click(object sender, EventArgs e)
+        private void buttonTestConnect_Click(object sender, EventArgs ev)
         {
-            OracleProvider oracleProvider = new OracleProvider();
-            string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
-            OracleConnection oracConnection = oracleProvider.GetConnection(conString);
-
-         
-
-            if (oracConnection != null)
+            try
             {
-                oracleConnection = oracConnection;
-                DBName = textBoxUser.Text;
-                labelTestConnect.Text = "SUCCESS!";
-                labelTestConnect.ForeColor = Color.Green;
+                OracleProvider oracleProvider = new OracleProvider();
+                string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
+                OracleConnection oracConnection = oracleProvider.GetConnection(conString);
+
+                if (oracConnection != null)
+                {
+                    oracleConnection = oracConnection;
+                    DBName = textBoxUser.Text;
+                    labelTestConnect.Text = "SUCCESS!";
+                    labelTestConnect.ForeColor = Color.Green;
+                }
+                else
+                {
+                    labelTestConnect.Text = "FAIL!";
+                    labelTestConnect.ForeColor = Color.Red;
+                }
             }
-            else
+            catch(Exception e)
             {
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
                 labelTestConnect.Text = "FAIL!";
                 labelTestConnect.ForeColor = Color.Red;
             }
@@ -56,7 +64,6 @@ namespace FssDbExp
 
         private void MainGui_Load(object sender, EventArgs e)
         {
-            //progressBarExpDt.Increment(10);
             if (comboBoxDirType.SelectedIndex == 1)
             {
                 checkBoxBDS.Enabled = false;
@@ -72,76 +79,101 @@ namespace FssDbExp
             textBoxRootDir.Text = Environment.SystemDirectory.ToString();
         }
 
-        private void buttonExpData_Click(object sender, EventArgs e)
+        private void buttonExpData_Click(object sender, EventArgs ev)
         {
-            OracleProvider oracleProvider = new OracleProvider();
-            string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
-            OracleConnection oracConnection = oracleProvider.GetConnection(conString);
-
-            if (oracleConnection != null)
+            if(MessageBox.Show("The process take many times, Are you sure you want to coutinue?", TNSModel.owner, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                oracleConnection = oracConnection;
-                DBName = textBoxUser.Text;
-            }
-
-            if (checkBoxExpObj.Checked)
-            {
-                if (oracleConnection != null && oracleConnection.State == ConnectionState.Open)
+                try
                 {
-                    // get list view
-                    List<string> listViewName = getListObject("VIEW");
-                    // get list trigger
-                    List<string> listTriggerName = getListObject("TRIGGER");
-                    // get list procedure
-                    List<string> listProcedureName = getListObject("PROCEDURE");
-                    // get list function
-                    List<string> listFunctionName = getListObject("FUNCTION");
-                    // get list package
-                    List<string> listPackageName = getListObject("PACKAGE");
-                    // get list type
-                    List<string> listType = getListObject("TYPE");
+                    OracleProvider oracleProvider = new OracleProvider();
+                    string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
+                    OracleConnection oracConnection = oracleProvider.GetConnection(conString);
 
-                    progressBarExpDt.Maximum = listViewName.Count + listTriggerName.Count +
-                                                listProcedureName.Count + listFunctionName.Count +
-                                                +listPackageName.Count + listType.Count;
-                    progressBarExpDt.Step = 1;
+                    if (oracleConnection != null)
+                    {
+                        oracleConnection = oracConnection;
+                        DBName = textBoxUser.Text;
+                    }
 
-                    // gen view
-                    genObject(listViewName, "VIEW", progressBarExpDt);
-                    // gen trigger
-                    genObject(listTriggerName, "TRIGGER", progressBarExpDt);
-                    // gen procedure
-                    genObject(listProcedureName, "PROCEDURE", progressBarExpDt);
-                    // gen function 
-                    genObject(listFunctionName, "FUNCTION", progressBarExpDt);
-                    // gen package
-                    genObject(listPackageName, "PACKAGE", progressBarExpDt);
-                    // gen type
-                    genObject(listType, "TYPE", progressBarExpDt);
+                    progressBarExpDt.Maximum = 0;
+
+                    if (checkBoxExpObj.Checked)
+                    {
+                        if (oracleConnection != null && oracleConnection.State == ConnectionState.Open)
+                        {
+                            // get list view
+                            List<string> listViewName = getListObject("VIEW");
+                            // get list trigger
+                            List<string> listTriggerName = getListObject("TRIGGER");
+                            // get list procedure
+                            List<string> listProcedureName = getListObject("PROCEDURE");
+                            // get list function
+                            List<string> listFunctionName = getListObject("FUNCTION");
+                            // get list package
+                            List<string> listPackageName = getListObject("PACKAGE");
+                            // get list type
+                            List<string> listType = getListObject("TYPE");
+
+                            progressBarExpDt.Maximum += listViewName.Count + listTriggerName.Count +
+                                                        listProcedureName.Count + listFunctionName.Count +
+                                                        +listPackageName.Count + listType.Count;
+                            progressBarExpDt.Step = 1;
+
+                            // gen view
+                            genObject(listViewName, "VIEW", progressBarExpDt);
+                            // gen trigger
+                            genObject(listTriggerName, "TRIGGER", progressBarExpDt);
+                            // gen procedure
+                            genObject(listProcedureName, "PROCEDURE", progressBarExpDt);
+                            // gen function 
+                            genObject(listFunctionName, "FUNCTION", progressBarExpDt);
+                            // gen package
+                            genObject(listPackageName, "PACKAGE", progressBarExpDt);
+                            // gen type
+                            genObject(listType, "TYPE", progressBarExpDt);
+                            progressBarExpDt.Value = 0;
+                        }
+                    }
+
+                    if (checkBoxExpTbl.Checked)
+                    {
+                        string[] lsTable = getListTableNameFromFile();
+                        int progressSize = 0;
+                        for (int index = 0; index < lsTable.Length; index++)
+                        {
+                            string[] tbl = lsTable[index].Split('_');
+                            List<string> listObjKeyName = GenScript.getListObjKeyName(tbl[0], tbl[1], oracleConnection);
+                            progressSize += listObjKeyName.Count;
+                        }
+                        progressSize += GenScript.getListObjKeyName("tltx", "tltxcd", oracleConnection).Count;
+                        progressBarExpDt.Maximum = progressSize;
+
+                        for (int index = 0; index < lsTable.Length; index++)
+                        {
+                            string[] tbl = lsTable[index].Split('_');
+                            string tblName = tbl[0].ToLower();
+
+                            if (tblName != "tltx" && tblName != "fldmaster" && tblName != "fldval"
+                                && tblName != "appchk" && tblName != "appmap")
+                            {
+                                GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBarExpDt);
+                            }
+                        }
+
+                        GenScript.GenInsertCommandForTransTable(oracConnection, pathMaster.ListPath, progressBarExpDt);
+                    }
+                    MessageBox.Show("Export completed!", TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-
-            if (checkBoxExpTbl.Checked)
-            {
-                string[] lsTable = getListTableNameFromFile();
-                int progressSize = 0;
-                for (int index = 0; index < lsTable.Length; index++)
+                catch (Exception e)
                 {
-                    string[] tbl = lsTable[index].Split('_');
-                    List<string> listObjKeyName = GenScript.getListObjKeyName(tbl[0], tbl[1], oracleConnection);
-                    progressSize += listObjKeyName.Count;
+                    MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Logger.Logging(e.Message, DateTime.Now.ToString());
                 }
-                progressBar2.Maximum = progressSize;
-                for (int index = 0; index < lsTable.Length; index++)
-                {
-                    string[] tbl = lsTable[index].Split('_');
-                    GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBar2);
-                }
+
+                progressBarExpDt.Value = 0;
+                oracleConnection.Close();
+                oracleConnection.Dispose();
             }
-            
-            oracleConnection.Close();
-            oracleConnection.Dispose();
-            MessageBox.Show("Export completed!", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonCreateDir_Click(object sender, EventArgs ev)
@@ -168,7 +200,8 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message + "\n" + e.StackTrace, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
             }
         }
 
@@ -213,7 +246,8 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message + "\n" + e.StackTrace, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
                 return null;
             }
         }
@@ -239,7 +273,8 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message + "\n" + e.StackTrace, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
                 return "";
             }
         }
@@ -259,7 +294,8 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message + "\n" + e.StackTrace, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
             }
         }
 
@@ -314,6 +350,16 @@ namespace FssDbExp
                 lines[index] = lines[index].ToUpper();
             }
             return lines;
+        }
+
+        private void textBoxUser_Enter(object sender, EventArgs e)
+        {
+            labelTestConnect.Text = "";
+        }
+
+        private void textBoxPass_Enter(object sender, EventArgs e)
+        {
+            labelTestConnect.Text = "";
         }
     }
 }

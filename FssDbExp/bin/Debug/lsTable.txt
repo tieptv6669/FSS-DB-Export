@@ -1,7 +1,7 @@
 Allcode_cdname
 AppModules_modcode
 AppRules_apptype
-AppPvRqd_objname
+apprvrqd_objname
 Apptx_apptype
 Cmdmenu_prid
 Crbtxmap_objname
@@ -12,9 +12,10 @@ Feemaster_feecd
 Filemap_filecode
 Filemaster_filecode
 Prchk_tltxcd
-Rptfielsd_objname
+Rptfields_objname
 Rptmaster_rptid
 Sbbatchctl_bchmdl
 Search_Searchcode
 Sysvar_varname
 Grmaster_objname
+searchfld_SEARCHCODE

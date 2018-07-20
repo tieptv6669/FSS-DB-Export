@@ -2,7 +2,6 @@ D:\FssDbExp\FssDbExp\bin\Debug\FssDbExp.exe.config
 D:\FssDbExp\FssDbExp\bin\Debug\FssDbExp.exe
 D:\FssDbExp\FssDbExp\bin\Debug\FssDbExp.pdb
 D:\FssDbExp\FssDbExp\bin\Debug\Oracle.ManagedDataAccess.dll
-D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.csprojAssemblyReference.cache
 D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.MainGui.resources
 D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.Properties.Resources.resources
 D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.csproj.GenerateResource.cache

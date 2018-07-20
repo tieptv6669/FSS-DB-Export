@@ -12,9 +12,10 @@ Feemaster_feecd
 Filemap_filecode
 Filemaster_filecode
 Prchk_tltxcd
-Rptfielsd_objname
+Rptfields_objname
 Rptmaster_rptid
 Sbbatchctl_bchmdl
 Search_Searchcode
+searchfld_Searchcode
 Sysvar_varname
 Grmaster_objname

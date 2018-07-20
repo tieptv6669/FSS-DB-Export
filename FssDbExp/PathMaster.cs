@@ -40,7 +40,7 @@ namespace FssDbExp
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "ALLCODE");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPMODULES");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPRULES");
-                ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPPVRQD");
+                ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPRVRQD");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPTX");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "CMDMENU");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "CRBTXMAP");
@@ -103,7 +103,7 @@ namespace FssDbExp
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "FDSSTATICSDATA");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPMODULES");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPRULES");
-                ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPPVRQD");
+                ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPRVRQD");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "APPTX");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "CMDMENU");
                 ListPath.Add(rootPath + "\\" + "1.Objects" + "\\" + "8.Parameters" + "\\" + "VSDTXMAP");

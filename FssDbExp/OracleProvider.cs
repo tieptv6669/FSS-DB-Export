@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace FssDbExp
@@ -12,9 +8,6 @@ namespace FssDbExp
     public class OracleProvider
     {
         // Properties
-        public string Host { get; set; }
-        public string Port { get; set; }
-        public string Service_name { get; set; }
         public string User { get; set; }
         public string Pass { get; set; }
 
@@ -40,7 +33,8 @@ namespace FssDbExp
             catch(Exception e)
             {
                 MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return "";
+                Logger.Logging(e.Message, DateTime.Now.ToString());
+                return null;
             }
         }
 
@@ -51,19 +45,12 @@ namespace FssDbExp
         /// <returns></returns>
         public OracleConnection GetConnection(string conStr)
         {
-            try
+            OracleConnection oracleConnection = new OracleConnection(conStr);
+            if (oracleConnection.State != System.Data.ConnectionState.Open)
             {
-                OracleConnection oracleConnection = new OracleConnection(conStr);
-                if (oracleConnection.State != System.Data.ConnectionState.Open)
-                {
-                    oracleConnection.Open();
-                }
-                return oracleConnection;
-            }catch(Exception e)
-            {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
+                oracleConnection.Open();
             }
+            return oracleConnection;
         }
 
         /// <summary>
@@ -73,23 +60,23 @@ namespace FssDbExp
         /// <returns></returns>
         public static OracleDataReader GetOracleDataReader(OracleCommand oracleCmd, OracleConnection oracleConnection)
         {
-            try
-            {
-                OracleDataReader oracleDataReader;
-                oracleCmd.Connection = oracleConnection;
-                oracleDataReader = oracleCmd.ExecuteReader();
+            OracleDataReader oracleDataReader;
+            oracleCmd.Connection = oracleConnection;
+            oracleDataReader = oracleCmd.ExecuteReader();
 
-                return oracleDataReader;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
+            return oracleDataReader;
         }
 
         public static string GenScriptInsert(string tableName, List<string> headerName, List<string> values)
         {
+            for(int index = 0; index < values.Count; index++)
+            {
+                if (values[index].Contains("'"))
+                {
+                    values[index] = values[index].Replace("'", "''");
+                }
+            }
+
             string script = "INSERT INTO " + tableName + " (";
 
             for (int index = 0; index < headerName.Count - 1; index++)

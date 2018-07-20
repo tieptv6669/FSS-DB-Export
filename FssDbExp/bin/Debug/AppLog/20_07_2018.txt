@@ -1,0 +1,18 @@
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. Friday, July 20, 2018
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. 7/20/2018 11:40:32 AM
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. 7/20/2018 11:40:38 AM
+ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:42:15 AM
+ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:42:16 AM
+ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:42:29 AM
+ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:42:42 AM
+ORA-00904: "OBJNAME": invalid identifier 7/20/2018 3:07:22 PM
+ORA-00904: "OBJNAME": invalid identifier 7/20/2018 3:07:59 PM
+Could not find a part of the path 'C:\Users\User\Desktop\New folder (3)\1.Objects\8.Parameters\TRANS\TRANS_0001.sql\TRANS_0002.sql'. 7/20/2018 3:13:26 PM
+Index was outside the bounds of the array. 7/20/2018 3:30:56 PM
+Index was outside the bounds of the array. 7/20/2018 3:31:08 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 3:38:26 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 3:38:32 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:17:28 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:17:55 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:20:53 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:24:00 PM

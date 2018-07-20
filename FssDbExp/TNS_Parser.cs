@@ -26,6 +26,7 @@ namespace FssDbExp
             catch(Exception e)
             {
                 MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
             }
 
             return inputString;
@@ -51,6 +52,7 @@ namespace FssDbExp
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
             }
 
             return List;
@@ -83,6 +85,7 @@ namespace FssDbExp
             catch(Exception e)
             {
                 MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.Logging(e.Message, DateTime.Now.ToString());
             }
             return result;
         }
