@@ -81,7 +81,7 @@ namespace FssDbExp
 
         private void buttonExpData_Click(object sender, EventArgs ev)
         {
-            if(MessageBox.Show("The process take many times, Are you sure you want to coutinue?", TNSModel.owner, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if(MessageBox.Show("The process take many times, Are you sure you want to continue?", TNSModel.owner, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 try
                 {

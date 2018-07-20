@@ -3,3 +3,7 @@ ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:47:43 AM
 ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:47:44 AM
 ORA-00942: table or view does not exist APPPVRQD 7/20/2018 11:47:53 AM
 ORA-00942: table or view does not exist RPTFIELSD 7/20/2018 11:48:14 AM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:57:08 PM
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. 7/20/2018 4:57:35 PM
+ORA-01017: invalid username/password; logon denied 7/20/2018 4:59:02 PM
+Access to the path 'C:\WINDOWS\system32\1.Objects' is denied. 7/20/2018 4:59:23 PM
