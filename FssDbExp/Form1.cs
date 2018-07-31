@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using System.IO;
+using System.Threading;
 
 namespace FssDbExp
 {
@@ -14,12 +15,12 @@ namespace FssDbExp
         public static OracleConnection oracleConnection;
         public static string DBName;
         public static PathMaster pathMaster;
+        public static string schemaName;
 
         public MainGui()
         {
             InitializeComponent();
         }
-
 
         private void buttonTestConnect_Click(object sender, EventArgs ev)
         {
@@ -35,6 +36,8 @@ namespace FssDbExp
                     DBName = textBoxUser.Text;
                     labelTestConnect.Text = "SUCCESS!";
                     labelTestConnect.ForeColor = Color.Green;
+                    char x = '"';
+                    schemaName = x + textBoxUser.Text + x + ".";
                 }
                 else
                 {
@@ -44,7 +47,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
                 labelTestConnect.Text = "FAIL!";
                 labelTestConnect.ForeColor = Color.Red;
@@ -81,10 +84,10 @@ namespace FssDbExp
 
         private void buttonExpData_Click(object sender, EventArgs ev)
         {
-            if(MessageBox.Show("The process take many times, Are you sure you want to continue?", TNSModel.owner, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if(MessageBox.Show("The process take many times, Are you sure you want to continue?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                try
-                {
+                    try
+                    {
                     OracleProvider oracleProvider = new OracleProvider();
                     string conString = oracleProvider.BuildConnectionString(comboBoxTNSname.SelectedValue.ToString(), textBoxUser.Text, textBoxPass.Text);
                     OracleConnection oracConnection = oracleProvider.GetConnection(conString);
@@ -118,10 +121,9 @@ namespace FssDbExp
                                                         listProcedureName.Count + listFunctionName.Count +
                                                         +listPackageName.Count + listType.Count;
                             progressBarExpDt.Step = 1;
-
                             // gen view
                             genObject(listViewName, "VIEW", progressBarExpDt);
-                            // gen trigger
+                            //gen trigger
                             genObject(listTriggerName, "TRIGGER", progressBarExpDt);
                             // gen procedure
                             genObject(listProcedureName, "PROCEDURE", progressBarExpDt);
@@ -131,6 +133,7 @@ namespace FssDbExp
                             genObject(listPackageName, "PACKAGE", progressBarExpDt);
                             // gen type
                             genObject(listType, "TYPE", progressBarExpDt);
+
                             progressBarExpDt.Value = 0;
                         }
                     }
@@ -147,7 +150,7 @@ namespace FssDbExp
                         }
                         progressSize += GenScript.getListObjKeyName("tltx", "tltxcd", oracleConnection).Count;
                         progressBarExpDt.Maximum = progressSize;
-
+                   
                         for (int index = 0; index < lsTable.Length; index++)
                         {
                             string[] tbl = lsTable[index].Split('_');
@@ -159,14 +162,13 @@ namespace FssDbExp
                                 GenScript.GenInsertCommand(tbl[0], tbl[1], oracConnection, pathMaster.ListPath, progressBarExpDt);
                             }
                         }
-
                         GenScript.GenInsertCommandForTransTable(oracConnection, pathMaster.ListPath, progressBarExpDt);
                     }
-                    MessageBox.Show("Export completed!", TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Export completed!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Logger.ShowMsg(e.Message);
                     Logger.Logging(e.Message, DateTime.Now.ToString());
                 }
 
@@ -200,7 +202,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
             }
         }
@@ -230,9 +232,9 @@ namespace FssDbExp
                 oracleCommand.Parameters.Add(new OracleParameter("mOwner", DBName));
                 OracleDataReader oracleDataReader = OracleProvider.GetOracleDataReader(oracleCommand, oracleConnection);
 
-                int x = oracleDataReader.FieldCount;
-                string y = oracleDataReader.GetName(0);
-                string z =  oracleDataReader.GetDataTypeName(0);
+                //int x = oracleDataReader.FieldCount;
+                //string y = oracleDataReader.GetName(0);
+                //string z =  oracleDataReader.GetDataTypeName(0);
 
                 if (oracleDataReader != null && oracleDataReader.HasRows)
                 {
@@ -246,7 +248,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
                 return null;
             }
@@ -266,14 +268,19 @@ namespace FssDbExp
                 {
                     oracleDataReader.Read();
                     script = oracleDataReader.GetString(0);
+                    if (objType == "TRIGGER")
+                    {
+                        int index = script.IndexOf("ALTER TRIGGER");
+                        script = script.Substring(0, index);
+                    }
                     return script;
                 }
-
+                
                 return script;
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
                 return "";
             }
@@ -287,6 +294,8 @@ namespace FssDbExp
                 foreach (string objName in listObjName)
                 {
                     string script = getScriptObj(objName, objType);
+                    script = script.Replace(schemaName, "");
+                    script = GenScript.StringStandardMaster(script);
                     string path = getPath(objType, objName);
                     File.WriteAllText(path, script, Encoding.UTF8);
                     progressBar.PerformStep();
@@ -294,7 +303,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
             }
         }
@@ -311,7 +320,7 @@ namespace FssDbExp
 
             if (objType.Equals("TRIGGER"))
             {
-                path = pathMaster.ListPath[11];
+                path = pathMaster.ListPath[7];
                 path += "\\" + objName + ".sql";
             }
 
@@ -335,7 +344,7 @@ namespace FssDbExp
 
             if (objType.Equals("TYPE"))
             {
-                path = pathMaster.ListPath[12];
+                path = pathMaster.ListPath[11];
                 path += "\\" + objName + ".sql";
             }
 
@@ -344,8 +353,16 @@ namespace FssDbExp
 
         private string[] getListTableNameFromFile()
         {
-            string[] lines = File.ReadAllLines("lsTable.txt");
-            for(int index = 0; index < lines.Length; index++)
+            string[] lines = { };
+            if(comboBoxDirType.SelectedItem.ToString() == "FlexDB")
+            {
+                lines = File.ReadAllLines("lsTable.txt");
+            }
+            if(comboBoxDirType.SelectedItem.ToString() == "FDSFlexDB")
+            {
+                lines = File.ReadAllLines("lsTableFDS.txt");
+            }
+            for (int index = 0; index < lines.Length; index++)
             {
                 lines[index] = lines[index].ToUpper();
             }
@@ -361,5 +378,5 @@ namespace FssDbExp
         {
             labelTestConnect.Text = "";
         }
-    }
+   }
 }

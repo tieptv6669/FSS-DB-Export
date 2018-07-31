@@ -1,0 +1,4 @@
+ORA-01017: invalid username/password; logon denied 7/24/2018 9:02:12 AM
+ORA-00942: table or view does not exist APPPVRQD 7/24/2018 9:09:22 AM
+ORA-00942: table or view does not exist APPPVRQD 7/24/2018 9:09:43 AM
+ORA-01017: invalid username/password; logon denied 7/24/2018 9:16:46 AM

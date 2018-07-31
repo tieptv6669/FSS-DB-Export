@@ -32,7 +32,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
                 return null;
             }

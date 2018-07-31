@@ -23,5 +23,15 @@ namespace FssDbExp
         
             File.AppendAllText(path, msgLog + " " + timeLog + Environment.NewLine);
         }
+
+        public static void ShowMsg(string msg)
+        {
+            var thread = new System.Threading.Thread(() => {
+                MessageCustomerForm messageCustomerForm = new MessageCustomerForm(msg);
+                messageCustomerForm.ShowDialog();
+            });
+
+            thread.Start();
+        }
     }
 }

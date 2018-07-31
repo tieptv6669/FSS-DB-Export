@@ -52,7 +52,7 @@ namespace FssDbExp
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
             }
         }
@@ -77,8 +77,13 @@ namespace FssDbExp
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Logger.Logging(e.Message, DateTime.Now.ToString());
+                Logger.ShowMsg(e.Message);
+                string msg_log = e.Message;
+                if(e.Message == "ORA-00942: table or view does not exist")
+                {
+                    msg_log += " " + tableName;
+                }
+                Logger.Logging(msg_log, DateTime.Now.ToString());
             }
 
             return result;
@@ -178,9 +183,30 @@ namespace FssDbExp
                 }
             }catch(Exception e)
             {
-                MessageBox.Show(e.Message, TNSModel.owner, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger.ShowMsg(e.Message);
                 Logger.Logging(e.Message, DateTime.Now.ToString());
             }
+        }
+
+        public static string StringStandardMaster(string strTemp)
+        {
+            string str = strTemp;
+            int index;
+            while(str[0] == '\n')
+            {
+                    str = str.Remove(0, 1);
+            }
+            str = str.Trim();
+            index = str.IndexOf("\n");
+            str = str.Insert(index + 1, "\n");
+            if(str[str.Length - 1] != ';')
+            {
+                str += ';';
+            }
+            str += '\n';
+            str += '/';
+
+            return str;
         }
     }
 }

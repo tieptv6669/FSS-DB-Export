@@ -1,0 +1,8 @@
+ORA-01017: invalid username/password; logon denied 7/31/2018 9:15:26 AM
+ORA-01017: invalid username/password; logon denied 7/31/2018 9:15:46 AM
+ORA-01017: invalid username/password; logon denied 7/31/2018 9:17:29 AM
+Length cannot be less than zero.
+Parameter name: length 7/31/2018 1:16:05 PM
+ORA-12541: TNS: No listener 7/31/2018 4:41:16 PM
+ORA-12541: TNS: No listener 7/31/2018 4:41:20 PM
+ORA-12541: TNS: No listener 7/31/2018 4:50:32 PM

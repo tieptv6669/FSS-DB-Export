@@ -20,3 +20,5 @@ G:\OrcDataExp\FssDbExp\obj\Debug\FssDbExp.csproj.GenerateResource.Cache
 G:\OrcDataExp\FssDbExp\obj\Debug\FssDbExp.csproj.CoreCompileInputs.cache
 G:\OrcDataExp\FssDbExp\obj\Debug\FssDbExp.exe
 G:\OrcDataExp\FssDbExp\obj\Debug\FssDbExp.pdb
+D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.csprojAssemblyReference.cache
+D:\FssDbExp\FssDbExp\obj\Debug\FssDbExp.MessageCustomerForm.resources

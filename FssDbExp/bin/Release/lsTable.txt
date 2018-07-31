@@ -1,7 +1,7 @@
 Allcode_cdname
 AppModules_modcode
 AppRules_apptype
-AppPvRqd_objname
+ApprvRqd_objname
 Apptx_apptype
 Cmdmenu_prid
 Crbtxmap_objname

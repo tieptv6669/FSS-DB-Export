@@ -1,0 +1,2 @@
+ORA-01017: invalid username/password; logon denied 7/23/2018 8:27:19 AM
+ORA-01017: invalid username/password; logon denied 7/23/2018 3:30:52 PM

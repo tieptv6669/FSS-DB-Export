@@ -19,3 +19,4 @@ G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.csproj.GenerateResource.Cache
 G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.csproj.CoreCompileInputs.cache
 G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.exe
 G:\OrcDataExp\FssDbExp\obj\Release\FssDbExp.pdb
+D:\FssDbExp\FssDbExp\obj\Release\FssDbExp.MessageCustomerForm.resources
